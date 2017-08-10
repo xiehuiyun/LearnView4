@@ -44,14 +44,14 @@ public class Practice10MatrixSkewView extends View {
         canvas.save();
         matrix.postSkew(0, 0.5f);
         canvas.concat(matrix);
-        canvas.drawBitmap(bitmap, point1.x, point1.y, paint);
+        canvas.drawBitmap(bitmap, point1.x, point1.y - bitmap.getHeight() / 2, paint);
         canvas.restore();
 
         canvas.save();
         matrix.reset();
-        matrix.postSkew(-0.3f, 0);
+        matrix.postSkew(-0.5f, 0, point2.x + bitmap.getWidth()/2, point2.y + bitmap.getHeight()/2);
         canvas.concat(matrix);
-        canvas.drawBitmap(bitmap, point2.x + bitmap.getWidth()/2, point2.y + bitmap.getWidth() / 2, paint);
+        canvas.drawBitmap(bitmap, point2.x, point2.y, paint);
         canvas.restore();
     }
 }
