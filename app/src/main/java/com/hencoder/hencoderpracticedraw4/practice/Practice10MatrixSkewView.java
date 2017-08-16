@@ -33,8 +33,9 @@ public class Practice10MatrixSkewView extends View {
     }
 
     {
-        matrix = new Matrix();
         bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.maps);
+        matrix = new Matrix();
+
     }
 
     @Override
@@ -47,9 +48,16 @@ public class Practice10MatrixSkewView extends View {
         canvas.drawBitmap(bitmap, point1.x, point1.y - bitmap.getHeight() / 2, paint);
         canvas.restore();
 
+        float[] src = {point2.x, point2.y,     point2.x + bitmap.getWidth(), point2.y,
+                point2.x, point2.y + bitmap.getHeight(), point2.x + bitmap.getWidth(), point2.y + bitmap.getHeight()};
+
+        float[] dest = {point2.x-10, point2.y+50,       point2.x + bitmap.getWidth() + 120, point2.y-50,
+                point2.x+30, point2.y + bitmap.getHeight()+60,        point2.x + bitmap.getWidth() -70, point2.y + bitmap.getHeight()-46};
+
         canvas.save();
         matrix.reset();
-        matrix.postSkew(-0.5f, 0, point2.x + bitmap.getWidth()/2, point2.y + bitmap.getHeight()/2);
+        matrix.setPolyToPoly(src,0,dest,0,4);
+//        matrix.postSkew(-0.5f, 0, point2.x + bitmap.getWidth() / 2, point2.y + bitmap.getHeight() / 2);
         canvas.concat(matrix);
         canvas.drawBitmap(bitmap, point2.x, point2.y, paint);
         canvas.restore();
